@@ -1,8 +1,14 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
 import Link from "next/link";
 import React from "react";
 
+import { Button } from "@/components/ui/button";
+
 const LandingPage = () => {
+  const handleClick = async () => {
+    await fetch('/api/api-limit');
+  };
   return (
     <div>
       LandingPage (Unprotected)
@@ -13,6 +19,9 @@ const LandingPage = () => {
         <Link href="/sign-up">
           <Button>Register</Button>
         </Link>
+      </div>
+      <div>
+        <Button onClick={handleClick}>Increase User API Limit</Button>
       </div>
     </div>
   );
