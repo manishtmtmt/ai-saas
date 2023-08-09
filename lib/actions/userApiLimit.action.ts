@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs";
 
 import { connectToDB } from "@/lib/mongoose";
-import UserAPILimitModel from "../models/userApiLimit";
+import UserAPILimitModel from "../models/user-api-limit.model";
 import { MAX_FREE_COUNTS } from "@/constants";
 
 export const increaseApiLimit = async () => {
