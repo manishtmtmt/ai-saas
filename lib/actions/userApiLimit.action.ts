@@ -28,6 +28,9 @@ export const increaseApiLimit = async () => {
 }
 
 export const checkApiLimit = async () => {
+  // connect to Database
+  await connectToDB();
+
   const { userId } = auth();
 
   if (!userId) return false;
@@ -39,6 +42,9 @@ export const checkApiLimit = async () => {
 }
 
 export const getApiLimit = async () => {
+  // connect to Database
+  await connectToDB();
+
   const { userId } = auth();
 
   if (!userId) return 0;

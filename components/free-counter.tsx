@@ -7,12 +7,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { MAX_FREE_COUNTS } from "@/constants";
 import { Button } from "./ui/button";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 interface IFreeCounterPros {
   apiLimitCount: number;
 }
 
 export const FreeCounter = ({ apiLimitCount = 0 }: IFreeCounterPros) => {
+  const proModal = useProModal();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -25,7 +27,7 @@ export const FreeCounter = ({ apiLimitCount = 0 }: IFreeCounterPros) => {
     <div className="px-3">
       <Card className="bg-white/10 border-0">
         <CardContent className="py-6">
-          <div className="text-center text-sm text-white mb-4 space-y-4">
+          <div className="text-center text-sm text-white mb-4 space-y-2">
             <p>
               {apiLimitCount} / {MAX_FREE_COUNTS} Free Generations
             </p>
@@ -34,11 +36,9 @@ export const FreeCounter = ({ apiLimitCount = 0 }: IFreeCounterPros) => {
               value={(apiLimitCount / MAX_FREE_COUNTS) * 100}
             />
           </div>
-          <Button className="w-full" variant="premium">
+          <Button onClick={proModal.onOpen} className="w-full" variant="premium">
             Upgrage
-            <Zap
-              className="w-4 h-4 ml-2 fill-white"
-            />
+            <Zap className="w-4 h-4 ml-2 fill-white" />
           </Button>
         </CardContent>
       </Card>
