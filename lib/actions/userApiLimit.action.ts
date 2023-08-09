@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs";
 
 import { connectToDB } from "@/lib/mongoose";
 import UserAPILimitModel from "../models/userApiLimit";
+import { MAX_FREE_COUNTS } from "@/constants";
 
 export const increaseApiLimit = async () => {
   try {
@@ -24,4 +25,16 @@ export const increaseApiLimit = async () => {
   } catch (error) {
     console.error("Error updating user count:", error);
   }
+}
+
+export const checkApiLimit = async () => {
+  const { userId } = auth();
+
+  if (!userId) return false;
+
+  const userApiLimit = await UserAPILimitModel.findOne({ userId });
+
+  if (!userApiLimit || userApiLimit.count < MAX_FREE_COUNTS) return true;
+  else return false;
+  
 }
