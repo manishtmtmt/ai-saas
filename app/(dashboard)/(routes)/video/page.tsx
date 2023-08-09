@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 import Heading from "@/components/heading";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
@@ -37,12 +38,14 @@ const VideoPage = () => {
 
       const response = await axios.post("/api/video", values);
 
-      SetVideo(response.data[0])
+      SetVideo(response.data[0]);
 
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();
+      } else {
+        toast.error("Something went wrong");
       }
     } finally {
       router.refresh();
@@ -105,13 +108,14 @@ const VideoPage = () => {
             </div>
           )}
           {!video && !isLoading && <Empty label="No conversation started." />}
-          {
-            video && (
-              <video className="w-full aspect-video mt-8 rounded-lg border bg-black" controls>
-                <source src={video} />
-              </video>
-            )
-          }
+          {video && (
+            <video
+              className="w-full aspect-video mt-8 rounded-lg border bg-black"
+              controls
+            >
+              <source src={video} />
+            </video>
+          )}
         </div>
       </div>
     </div>
