@@ -65,7 +65,7 @@ Genius offers a secure authentication process using the Clerk library. Users nee
 
 ### Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/genius.git`
+1. Clone the repository: `git clone https://github.com/manishtmtmt/ai-saas.git`
 2. Navigate to the project directory: `cd ai-saas`
 3. Install dependencies: `npm install`
 
